@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kvalitetsformulär</title>
+</head>
+<body>
+<h1>Kvalitetsformulär</h1>
+<form th:action="@{/qualityForm}" method="post" th:object="${qualityForm}">
+
+    Kund: <input type="text" th:field="*{customer}" /><br/>
+    Konsult: <input type="text" th:field="*{consultant}" /><br/>
+    Säljare: <input type="text" th:field="*{seller}" /><br/>
+
+    Datum: <input type="date" th:field="*{date}" /><br/>
+    Konsult informerad: <input type="date" th:field="*{consultantInformedDate}" /><br/>
+
+    Uppstart: <textarea th:field="*{startup}"></textarea><br/>
+    Resultat: <textarea th:field="*{result}"></textarea><br/>
+
+    Ansvar: <textarea th:field="*{responsibility}"></textarea><br/>
+    Enkelhet: <textarea th:field="*{simplicity}"></textarea><br/>
+    Glädje: <textarea th:field="*{joy}"></textarea><br/>
+    Innovation: <textarea th:field="*{innovation}"></textarea><br/>
+
+    Nöjdhet (konsult):
+    <input type="number" th:field="*{satisfactionConsult}" min="1" max="10"/><br/>
+    Nöjdhet (HiQ):
+    <input type="number" th:field="*{satisfactionCompany}" min="1" max="10"/><br/>
+
+    Förbättringar: <textarea th:field="*{improvements}"></textarea><br/>
+    Värdebedömning (positivt): <textarea th:field="*{valueAssessmentPositive}"></textarea><br/>
+    Värdebedömning (negativt): <textarea th:field="*{valueAssessmentNegative}"></textarea><br/>
+
+    Övrigt: <textarea th:field="*{other}"></textarea><br/>
+    Nästa uppföljning: <input type="date" th:field="*{nextFollowUp}" /><br/>
+
+    <button type="submit">Skicka</button>
+</form>
+
+<!-- Visa bekräftelsemeddelande -->
+<div th:if="${param.success}">
+    <p>Formuläret skickades in!</p>
+</div>
+</body>
+</html>
