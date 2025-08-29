@@ -25,13 +25,11 @@ public class QualityForm {
     private String startup;
     private String result;
 
-    // Dessa är textfält (kvalitativa kommentarer/bedömningar)
     private String responsibility;
     private String simplicity;
     private String joy;
     private String innovation;
 
-    // Kvantitativa omdömen (1–10)
     private Integer satisfactionConsult;
     private Integer satisfactionCompany;
 
@@ -49,7 +47,7 @@ public class QualityForm {
         this.satisfactionConsult = satisfactionConsult;
     }
 
-    public void setSatisfactionCompany(Integer satisfactionCompany) {
+    public void setSatisfactionCompany(Integer satisfactionCompany) throws IllegalArgumentException{
         validateScore(satisfactionCompany);
         this.satisfactionCompany = satisfactionCompany;
     }

@@ -3,18 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Kvalitetsformulär</title>
+    <style>
+        .top-row, .inline-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .top-row div, .inline-row div {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            max-width: 25%;
+        }
+        hr {
+            margin: 1.5rem 0;
+        }
+        input[type="text"], input[type="number"], textarea {
+            margin-bottom: 0.8rem;
+            width: 100%;
+            box-sizing: border-box;
+            height: 2rem;
+        }
+        input[type="date"] {
+            margin-bottom: 0.8rem;
+            width: 100%;
+            box-sizing: border-box;
+            height: 1.5rem;
+        }
+        textarea {
+            resize: vertical;
+        }
+    </style>
 </head>
 <body>
 <h1>Kvalitetsformulär</h1>
 <form th:action="@{/qualityForm}" method="post" th:object="${qualityForm}">
 
-    Kund: <input type="text" th:field="*{customer}" /><br/>
-    Konsult: <input type="text" th:field="*{consultant}" /><br/>
-    Säljare: <input type="text" th:field="*{seller}" /><br/>
+    <!-- Översta raden -->
+    <div class="top-row">
+        <div>
+            <label>Kund:</label>
+            <input type="text" th:field="*{customer}" />
+        </div>
+        <div>
+            <label>Konsult:</label>
+            <input type="text" th:field="*{consultant}" />
+        </div>
+        <div>
+            <label>Säljare:</label>
+            <input type="text" th:field="*{seller}" />
+        </div>
+        <div>
+            <label>Datum:</label>
+            <input type="date" th:field="*{date}" />
+        </div>
+        <div>
+            <label>Konsult informerad:</label>
+            <input type="date" th:field="*{consultantInformedDate}" />
+        </div>
+    </div>
 
-    Datum: <input type="date" th:field="*{date}" /><br/>
-    Konsult informerad: <input type="date" th:field="*{consultantInformedDate}" /><br/>
+    <hr/>
 
+    <!-- Resten av fälten -->
     Uppstart: <textarea th:field="*{startup}"></textarea><br/>
     Resultat: <textarea th:field="*{result}"></textarea><br/>
 
@@ -23,14 +74,31 @@
     Glädje: <textarea th:field="*{joy}"></textarea><br/>
     Innovation: <textarea th:field="*{innovation}"></textarea><br/>
 
-    Nöjdhet (konsult):
-    <input type="number" th:field="*{satisfactionConsult}" min="1" max="10"/><br/>
-    Nöjdhet (HiQ):
-    <input type="number" th:field="*{satisfactionCompany}" min="1" max="10"/><br/>
+    <!-- Nöjdhet bredvid varandra -->
+    <div class="inline-row">
+        <div>
+            <label>Nöjdhet (konsult):</label>
+            <input type="number" th:field="*{satisfactionConsult}" min="1" max="10"/>
+        </div>
+        <div>
+            <label>Nöjdhet (HiQ):</label>
+            <input type="number" th:field="*{satisfactionCompany}" min="1" max="10"/>
+        </div>
+    </div>
 
     Förbättringar: <textarea th:field="*{improvements}"></textarea><br/>
-    Värdebedömning (positivt): <textarea th:field="*{valueAssessmentPositive}"></textarea><br/>
-    Värdebedömning (negativt): <textarea th:field="*{valueAssessmentNegative}"></textarea><br/>
+
+    <!-- Värdebedömningar bredvid varandra -->
+    <div class="inline-row">
+        <div>
+            <label>Värdebedömning (positivt):</label>
+            <textarea th:field="*{valueAssessmentPositive}"></textarea>
+        </div>
+        <div>
+            <label>Värdebedömning (negativt):</label>
+            <textarea th:field="*{valueAssessmentNegative}"></textarea>
+        </div>
+    </div>
 
     Övrigt: <textarea th:field="*{other}"></textarea><br/>
     Nästa uppföljning: <input type="date" th:field="*{nextFollowUp}" /><br/>
